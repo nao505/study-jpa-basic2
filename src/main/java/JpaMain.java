@@ -7,16 +7,28 @@ import javax.persistence.Persistence;
 
 public class JpaMain {
 
-    static final String FIND_ALL = "select m from Member as m";
-
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("hello");
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         try {
-            Member member = new Member(2L, "TestA");
-            em.persist(member);
+            Member m1 = new Member();
+            m1.setUserName("A");
+
+            Member m2 = new Member();
+            m2.setUserName("B");
+
+            Member m3 = new Member();
+            m3.setUserName("C");
+
+            System.out.println("m1 = " + m1.getId());
+            System.out.println("m2 = " + m2.getId());
+            System.out.println("m3 = " + m3.getId());
+            em.persist(m1);
+            em.persist(m2);
+            em.persist(m3);
+
             tx.commit();
         } catch (Exception e) {
             e.printStackTrace();
