@@ -1,4 +1,5 @@
 import hellojpa.Member;
+import hellojpa.Team;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -13,21 +14,20 @@ public class JpaMain {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         try {
-            Member m1 = new Member();
-            m1.setUserName("A");
+            // 저장
+            Team team = new Team();
+            team.setName("TeamA");
+            em.persist(team);
 
-            Member m2 = new Member();
-            m2.setUserName("B");
+            Member member = new Member();
+            member.setUserName("member1");
+            member.setTeam(team);
+            em.persist(member);
 
-            Member m3 = new Member();
-            m3.setUserName("C");
+            Member findMember = em.find(Member.class, member.getId());
+            Team findTeam = findMember.getTeam();
 
-            System.out.println("m1 = " + m1.getId());
-            System.out.println("m2 = " + m2.getId());
-            System.out.println("m3 = " + m3.getId());
-            em.persist(m1);
-            em.persist(m2);
-            em.persist(m3);
+            System.out.println("findTeam = " + findTeam.getName());
 
             tx.commit();
         } catch (Exception e) {
