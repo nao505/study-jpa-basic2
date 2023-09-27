@@ -13,11 +13,11 @@ public class Team {
     private Long id;
     private String name;
 
-    @OneToMany(mappedBy = "team")
-    private List<Member> members;
+    @OneToMany()
+    @JoinColumn(name = "TEAM_ID")
+    private List<Member> members = new ArrayList<>();
 
     public Team() {
-        this.members = new ArrayList<>();
     }
 
     public List<Member> getMembers() {
@@ -38,11 +38,6 @@ public class Team {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public void addMember(Member member) {
-        member.setTeam(this);
-        members.add(member);
     }
 
     @Override

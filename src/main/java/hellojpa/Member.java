@@ -3,10 +3,6 @@ package hellojpa;
 import javax.persistence.*;
 
 @Entity
-@SequenceGenerator(
-        name = "MEMBER_SEQ_GENERATOR",
-        sequenceName = "MEMBER_SEQ", // 매핑할 데이터베이스 시퀀스 이름
-        initialValue = 1, allocationSize = 50) // allocationSize를 50으로 변경
 public class Member {
 
     @Id
@@ -16,17 +12,15 @@ public class Member {
     @Column(name = "USERNAME")
     private String userName;
 
-//    @Column(name = "TEAM_ID")
-//    private Long teamId;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "TEAM_ID")
+    @ManyToOne
+    @JoinColumn(name = "TEAM_ID", insertable = false, updatable = false)
     private Team team;
 
+    @OneToOne
+    @JoinColumn(name = "LOCKER_ID")
+    private Locker locker;
 
-    public Member() {
-
-    }
+    public Member() {}
 
     public Long getId() {
         return id;
@@ -42,22 +36,5 @@ public class Member {
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public Team getTeam() {
-        return team;
-    }
-
-    public void setTeam(Team team) {
-        this.team = team;
-    }
-
-    @Override
-    public String toString() {
-        return "Member{" +
-                "id=" + id +
-                ", userName='" + userName + '\'' +
-                ", team=" + team +
-                '}';
     }
 }
