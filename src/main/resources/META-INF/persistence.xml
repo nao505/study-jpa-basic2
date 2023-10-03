@@ -6,6 +6,12 @@
         <class>hellojpa.Member</class>
         <class>hellojpa.Team</class>
         <class>hellojpa.Locker</class>
+        <class>hellojpa.MemberProduct</class>
+        <class>hellojpa.Product</class>
+        <class>hellojpa.items.Item</class>
+        <class>hellojpa.items.Book</class>
+        <class>hellojpa.items.Movie</class>
+        <class>hellojpa.items.Album</class>
         <properties>
             <!-- 필수 속성 -->
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
