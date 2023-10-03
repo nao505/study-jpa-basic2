@@ -12,10 +12,16 @@ public class Team {
     @Column(name = "TEAM_ID")
     private Long id;
     private String name;
-    @OneToMany
+
+    @OneToMany()
+    @JoinColumn(name = "TEAM_ID")
     private List<Member> members = new ArrayList<>();
 
     public Team() {
+    }
+
+    public List<Member> getMembers() {
+        return members;
     }
 
     public Long getId() {
@@ -32,5 +38,14 @@ public class Team {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Team{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", members=" + members +
+                '}';
     }
 }
