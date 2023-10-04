@@ -15,8 +15,8 @@ public class Member extends BaseEntity {
     @Column(name = "USERNAME")
     private String userName;
 
-    @ManyToOne
-    @JoinColumn(name = "TEAM_ID", insertable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.LAZY) // 웬만하면 LAZY (지연로딩) 사용할것.
+    @JoinColumn()
     private Team team;
 
     @OneToOne
@@ -43,5 +43,13 @@ public class Member extends BaseEntity {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
     }
 }
